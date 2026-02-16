@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<!-- If you know what you're doing, you can change these -->
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
@@ -11,12 +11,11 @@
 
 	<!-- Change these! -->
 	<PropertyGroup>
-		<AssemblyName>lammas123.CrabTemplate</AssemblyName>
-		<Product>CrabTemplate</Product>
+		<AssemblyName>Companion.ServerList</AssemblyName>
+		<Product>ServerList</Product>
 		<Version>0.0.1</Version>
 
-		<SteamDir Condition="'$(SteamDir)' == ''">S:\Steam</SteamDir>
-		<ProfileDir Condition="'$(ProfileDir)' == ''">S:\Steam\steamapps\common\Crab Game</ProfileDir>
+		<ProfileDir Condition="'$(ProfileDir)' == ''">\home\lualt\.var\app\com.valvesoftware.Steam\.local\share\Steam\steamapps\common\Crab Game</ProfileDir>
 		<UnhollowedDir>$(ProfileDir)\BepInEx\unhollowed</UnhollowedDir>
 
 		<!--
@@ -72,11 +71,12 @@
 	</Target>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(AutoLaunch)' == 'true'">
-		<Exec Command="copy &quot;$(OutDir)$(AssemblyName).dll&quot; &quot;$(ProfileDir)\BepInEx\plugins\$(AssemblyName)\$(AssemblyName).dll&quot;" />
-		<Exec Command="$(SteamDir)\steam.exe steam://rungameid/1782210" />
+		<Exec Command="mkdir -p &quot;$(ProfileDir)/BepInEx/plugins/$(AssemblyName)&quot;" />
+		<Exec Command="cp &quot;$(OutDir)$(AssemblyName).dll&quot; &quot;$(ProfileDir)/BepInEx/plugins/$(AssemblyName)/$(AssemblyName)-$(Version).dll&quot;" />
+		<!--<Exec Command="$(SteamDir)\steam.exe steam://rungameid/1782210" />-->
 	</Target>
-	
-	
+
+
 	<!-- Dependencies -->
 	<ItemGroup>
 		<PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" PrivateAssets="all" Version="0.4.1">
@@ -85,17 +85,17 @@
 		</PackageReference>
 
 		<PackageReference Include="BepInEx.PluginInfoProps" Version="2.1.0" />
-		
+
 		<PackageReference Include="BepInEx.IL2CPP" Version="6.0.0-*" />
 		<PackageReference Include="BepInEx.Preloader.Core" Version="6.0.0-*" />
 	</ItemGroup>
-	
+
 	<ItemGroup>
 		<!-- BepInEx Assemblies -->
 		<Reference Include="0Harmony" Publicize="true">
 			<HintPath>$(ProfileDir)\BepInEx\core\0Harmony.dll</HintPath>
 		</Reference>
-		
+
 		<!-- Game Assemblies -->
 		<Reference Include="Assembly-CSharp">
 			<HintPath>$(UnhollowedDir)\Assembly-CSharp.dll</HintPath>
@@ -103,7 +103,7 @@
 		<Reference Include="Assembly-CSharp-firstpass">
 			<HintPath>$(UnhollowedDir)\Assembly-CSharp-firstpass.dll</HintPath>
 		</Reference>
-		
+
 		<!-- Il2Cpp Assemblies -->
 		<Reference Include="Il2Cppmscorlib">
 			<HintPath>$(UnhollowedDir)\Il2Cppmscorlib.dll</HintPath>
@@ -145,7 +145,7 @@
 		<Reference Include="UnityEngine.UI">
 			<HintPath>$(UnhollowedDir)\UnityEngine.UI.dll</HintPath>
 		</Reference>
-		
+
 		<Reference Include="Unity.PostProcessing.Runtime">
 			<HintPath>$(UnhollowedDir)\Unity.PostProcessing.Runtime.dll</HintPath>
 		</Reference>

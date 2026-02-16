@@ -1,19 +1,19 @@
-﻿/* ================================= Intermediary Mappings v1 - Crab Game v1.362 ================================= //
+/* ================================= Intermediary Mappings v1 - Crab Game v1.362 ================================= //
  * A *near* complete set of intermediary mapping names, using the names originally written by Dani where viable.
  * Most, if not all of these names were found by inspecting the old versions of Crab Game, which weren't obfuscated,
  * and then comparing their definitions and functionality with the latest version (v1.362), which is obfuscated.
- * 
+ *
  * Included are also intermediary names for scripts from packages Dani used in Crab Game, namely:
  * - DitzelGames.FaskIK
  * - Dissonace.Integrations.SteamworksP2P
- * 
+ *
  * The 'Custom Deobfuscated Names' section contains names I came up with myself, as these were types added later,
  * when Dani began obfuscating the game. This was the first version to be obfuscated, albeit lightly with A-P names:
  * - https://steamdb.info/depot/1782211/history/?changeid=M:8222576179761599905
  * Every version after this is more heavily obfuscated, and uses obscure unicode characters. The latest version
  * for MacOS uses the unicode characters \u1099-\u10A8, and every obfuscated name is 11 characters long:
  * - https://steamdb.info/depot/1782212/history/?changeid=M:4682332062135883449
- * 
+ *
  * At the very bottom are 4 types that are both never used (from what I can tell) and have no functionality. Because
  * these types were added when Dani had already started obfuscating the game, I cannot give them reasonable names.
 // =============================================================================================================== */
