@@ -31,6 +31,10 @@ namespace ServerList
 			string iconURL = SteamMatchmaking.GetLobbyData(param_1, "LobbyIcon");
 			if (iconURL != string.Empty)
 				__instance.StartCoroutine(PrefabSetIcon(__instance, iconURL));
+
+			string serverType = SteamMatchmaking.GetLobbyData(param_1, "ServerType");
+			if (serverType != string.Empty)
+				__instance.versionNumber.text = serverType + " " + __instance.versionNumber.text;
 		}
 
 		internal static IEnumerator PrefabSetIcon(SerevrUIPrefab instance, string url)
