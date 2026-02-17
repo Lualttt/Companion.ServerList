@@ -152,5 +152,11 @@
 		<Reference Include="Unity.TextMeshPro">
 			<HintPath>$(UnhollowedDir)\Unity.TextMeshPro.dll</HintPath>
 		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestModule">
+			<HintPath>$(UnhollowedDir)\UnityEngine.UnityWebRequestModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UnityWebRequestTextureModule">
+			<HintPath>$(UnhollowedDir)\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+		</Reference>
 	</ItemGroup>
 </Project>

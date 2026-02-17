@@ -1,5 +1,9 @@
+using UnityEngine;
+using System.Collections;
+using UnityEngine.Networking;
 using HarmonyLib;
 using SteamworksNative;
+using BepInEx.IL2CPP.Utils;
 
 namespace ServerList
 {
@@ -23,6 +27,22 @@ namespace ServerList
 				__instance.title.richText = true;
 				__instance.title.text = titleColor;
 			}
+
+			string iconURL = SteamMatchmaking.GetLobbyData(param_1, "LobbyIcon");
+			if (iconURL != string.Empty)
+				__instance.StartCoroutine(PrefabSetIcon(__instance, iconURL));
+		}
+
+		internal static IEnumerator PrefabSetIcon(SerevrUIPrefab instance, string url)
+		{
+			UnityWebRequest request = UnityWebRequestTexture.GetTexture(url);
+			yield return request.SendWebRequest();
+
+			if (request.result != UnityWebRequest.Result.Success)
+				yield break;
+
+			Texture texture = DownloadHandlerTexture.GetContent(request);
+			instance.previewImg.texture = texture;
 		}
 	}
 }
