@@ -13,7 +13,7 @@
 	<PropertyGroup>
 		<AssemblyName>Companion.ServerList</AssemblyName>
 		<Product>ServerList</Product>
-		<Version>0.0.1</Version>
+		<Version>0.0.2</Version>
 
 		<ProfileDir Condition="'$(ProfileDir)' == ''">\home\lualt\.var\app\com.valvesoftware.Steam\.local\share\Steam\steamapps\common\Crab Game</ProfileDir>
 		<UnhollowedDir>$(ProfileDir)\BepInEx\unhollowed</UnhollowedDir>
