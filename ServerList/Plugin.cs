@@ -2,6 +2,7 @@ using BepInEx;
 using BepInEx.IL2CPP;
 using HarmonyLib;
 using System.Globalization;
+using System.Net.Http;
 
 namespace ServerList
 {
@@ -9,6 +10,7 @@ namespace ServerList
 	public sealed class ServerList : BasePlugin
 	{
 		internal static ServerList Instance { get; private set; }
+		internal static HttpClient Client { get; private set; }
 
 		public override void Load()
 		{
@@ -18,6 +20,7 @@ namespace ServerList
 			CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
 			Instance = this;
+			Client = new();
 
 			Harmony harmony = new(MyPluginInfo.PLUGIN_NAME);
 			harmony.PatchAll(typeof(Patches));

@@ -1,6 +1,6 @@
 {
 	"name": "Companion.ServerList",
-	"version_number": "0.0.1",
+	"version_number": "0.0.3",
 	"description": "this mods adds support for colored server names, a custom server icon and server type",
 	"website_url": "https://github.com/Lualttt/Companion.ServerList/",
 	"dependencies": [

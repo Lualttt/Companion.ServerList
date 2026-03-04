@@ -13,7 +13,7 @@
 	<PropertyGroup>
 		<AssemblyName>Companion.ServerList</AssemblyName>
 		<Product>ServerList</Product>
-		<Version>0.0.2</Version>
+		<Version>0.0.3</Version>
 
 		<ProfileDir Condition="'$(ProfileDir)' == ''">\home\lualt\.var\app\com.valvesoftware.Steam\.local\share\Steam\steamapps\common\Crab Game</ProfileDir>
 		<UnhollowedDir>$(ProfileDir)\BepInEx\unhollowed</UnhollowedDir>
@@ -152,11 +152,8 @@
 		<Reference Include="Unity.TextMeshPro">
 			<HintPath>$(UnhollowedDir)\Unity.TextMeshPro.dll</HintPath>
 		</Reference>
-		<Reference Include="UnityEngine.UnityWebRequestModule">
-			<HintPath>$(UnhollowedDir)\UnityEngine.UnityWebRequestModule.dll</HintPath>
-		</Reference>
-		<Reference Include="UnityEngine.UnityWebRequestTextureModule">
-			<HintPath>$(UnhollowedDir)\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+		<Reference Include="UnityEngine.ImageConversionModule">
+			<HintPath>$(UnhollowedDir)\UnityEngine.ImageConversionModule.dll</HintPath>
 		</Reference>
 	</ItemGroup>
 </Project>

@@ -1,9 +1,11 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.Networking;
 using HarmonyLib;
 using SteamworksNative;
 using BepInEx.IL2CPP.Utils;
+using System.Net.Http;
+using System;
+using System.Threading.Tasks;
 
 namespace ServerList
 {
@@ -42,15 +44,49 @@ namespace ServerList
 
 		internal static IEnumerator PrefabSetIcon(SerevrUIPrefab instance, string url)
 		{
-			UnityWebRequest request = UnityWebRequestTexture.GetTexture(url);
-			yield return request.SendWebRequest();
-
-			if (request.result != UnityWebRequest.Result.Success)
+			Task<HttpResponseMessage> responseTask;
+			try
+			{
+				responseTask = ServerList.Client.GetAsync(url);
+			}
+			catch (Exception e)
+			{
+				ServerList.Instance.Log.LogWarning($"get request unsuccessful for \"{url}\" error: {e.Message}");
 				yield break;
+			}
+			while (!responseTask.IsCompleted)
+				yield return null;
+			using HttpResponseMessage response = responseTask.Result;
 
-			Texture texture = DownloadHandlerTexture.GetContent(request);
+			if (!response.IsSuccessStatusCode)
+			{
+				ServerList.Instance.Log.LogWarning($"get request unsuccessful for \"{url}\" code: {response.StatusCode}");
+				yield break;
+			}
+
+			Task<byte[]> bytesTask;
+			try
+			{
+				bytesTask = response.Content.ReadAsByteArrayAsync();
+			}
+			catch (Exception e)
+			{
+				ServerList.Instance.Log.LogWarning($"failed to read bytes for \"{url}\" error: {e.Message}");
+				yield break;
+			}
+			while (!bytesTask.IsCompleted)
+				yield return null;
+			UnhollowerBaseLib.Il2CppStructArray<byte> bytes = new(bytesTask.Result);
+
+			Texture2D texture = new(2, 2, TextureFormat.RGBA32, false);
+			bool successful = ImageConversion.LoadImage(texture, bytes);
+			if (!successful)
+			{
+				ServerList.Instance.Log.LogWarning($"failed to load image for \"{url}\"");
+				yield break;
+			}
+
 			instance.previewImg.texture = texture;
-
 			instance.previewImg.gameObject.SetActive(true);
 		}
 	}
